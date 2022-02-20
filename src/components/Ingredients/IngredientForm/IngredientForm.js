@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Card from '../../UI/Card/Card';
+import LoadingIndicator from '../../UI/LoadingIndicator/LoadingIndicator'
+import ErrorModal from '../../UI/ErrorModal/ErrorModal'
 import './IngredientForm.css';
 
 const IngredientForm = React.memo((props) => {
@@ -13,6 +15,7 @@ const IngredientForm = React.memo((props) => {
 
   return (
     <section className="ingredient-form">
+      {props.error && <ErrorModal onClose={props.clearError}>{props.error}</ErrorModal>}
       <Card>
         <form onSubmit={submitHandler}>
 
@@ -34,6 +37,7 @@ const IngredientForm = React.memo((props) => {
 
           <div className="ingredient-form__actions">
             <button type="submit">Add Ingredient</button>
+            {props.loadingStatus && <LoadingIndicator />}
           </div>
 
         </form>
